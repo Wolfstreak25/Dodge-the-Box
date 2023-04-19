@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,10 +29,10 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if(Input.GetAxis("Horizontal") != 0)
+        if(m_Horizontal != 0)
         {
             playerAnimator.SetBool("Run",true);
-            float horizontalAxis = Input.GetAxis("Horizontal");
+            float horizontalAxis = m_Horizontal;
             Vector3 moveDirection = new Vector3(horizontalAxis, 0, 0);
             LookAt();
             playerRigidbody.MovePosition(transform.position + moveDirection * movementSpeed * Time.deltaTime);
@@ -45,9 +46,9 @@ public class PlayerController : MonoBehaviour
     private void LookAt()
     {
         Vector3 moveDirection = new Vector3();
-        if(Input.GetAxis("Horizontal") != 0)
+        if(m_Horizontal != 0)
         {
-            float horizontalAxis = Input.GetAxis("Horizontal");
+            float horizontalAxis = m_Horizontal;
             moveDirection = new Vector3(horizontalAxis, 0, 0);
             
         }
@@ -57,5 +58,34 @@ public class PlayerController : MonoBehaviour
         }
         Quaternion toRotation = Quaternion.LookRotation(moveDirection,Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation,toRotation, desiredRotationSpeed * Time.deltaTime);
+    }
+
+    [Header("Input Settings")]
+    public PlayerInput playerInput;
+    private Vector2 m_Move;
+    private float m_Horizontal;
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        m_Move = context.ReadValue<Vector2>();
+    }
+
+    public void OnHorizontal(InputAction.CallbackContext context)
+    {
+        m_Horizontal = context.ReadValue<float>();
+    }
+
+    public void SetInputActiveState(bool gameIsPaused)
+    {
+        switch (gameIsPaused)
+        {
+            case true:
+                playerInput.DeactivateInput();
+                break;
+
+            case false:
+                playerInput.ActivateInput();
+                break;
+        }
     }
 }
