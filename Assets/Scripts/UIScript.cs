@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
@@ -8,13 +9,13 @@ public class UIScript : MonoBehaviour
     [SerializeField]
     private int score;
     [SerializeField]
-    private Text scoreText;
+    private TMP_Text scoreText;
     [SerializeField]
     public bool gameStarted = false;
     [SerializeField]
-    private Text title;
+    private GameObject menuScreen;
     [SerializeField]
-    private Button tapToPlay;
+    private GameObject inGameScreen;
 
     // Use this for initialization
     void Start ()
@@ -29,9 +30,8 @@ public class UIScript : MonoBehaviour
 
     public void PlayGame()
     {
-        scoreText.gameObject.SetActive(true);
-        title.gameObject.SetActive(false);
-        tapToPlay.gameObject.SetActive(false);
+        menuScreen.SetActive(false);
+        inGameScreen.SetActive(true);
         gameStarted = true;
     }
 
