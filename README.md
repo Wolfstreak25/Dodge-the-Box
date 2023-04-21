@@ -15,6 +15,6 @@ There ane many things that could be improved in this project such as
 2. Change in scoring system instread of time based it could be different
 3. Destroy mechanism
 and so on...
-#Screenshots
+# Screenshots
 ![Screenshot (27)](https://user-images.githubusercontent.com/108297565/233614254-ba905b4b-4fcf-4aaf-b6b7-b47b40cdd782.png)
 ![Screenshot (29)](https://user-images.githubusercontent.com/108297565/233614357-26361d4b-4d4c-416f-802e-abbd08b10950.png)
